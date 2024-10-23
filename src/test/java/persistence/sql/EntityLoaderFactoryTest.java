@@ -63,23 +63,4 @@ class EntityLoaderFactoryTest {
         assertThat(factory.getLoader(TestPerson.class)).isNotNull();
     }
 
-    @ParameterizedTest
-    @MethodSource("provideEntityTypeAndExpected")
-    @DisplayName("EntityLoaderFactory 는 EntityLoader 를 포함하고 있는지 확인할 수 있다.")
-    void testContainsLoader(Class<?> entityType, boolean expected) {
-        // given
-        EntityLoaderFactory factory = EntityLoaderFactory.getInstance();
-        factory.addLoader(TestPerson.class, database);
-
-        // when, then
-        assertThat(factory.containsLoader(entityType)).isEqualTo(expected);
-
-    }
-
-    public static Stream<Arguments> provideEntityTypeAndExpected() {
-        return Stream.of(
-                Arguments.of(TestPerson.class, true),
-                Arguments.of(String.class, false)
-        );
-    }
 }

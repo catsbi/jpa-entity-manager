@@ -34,8 +34,4 @@ public class EntityLoaderFactory {
 
         throw new IllegalArgumentException("EntityLoader not found for " + entityType.getName());
     }
-
-    public boolean containsLoader(Class<?> entityType) {
-        return context.containsKey(entityType);
-    }
 }

@@ -8,7 +8,7 @@ public interface EntityManager {
      *
      * @param entity 저장할 엔티티
      */
-    <T> T persist(T entity);
+    <T> void persist(T entity);
 
     /**
      * 엔티티를 수정한다.

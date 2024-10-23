@@ -24,7 +24,7 @@ public class DefaultEntityManager implements EntityManager {
     }
 
     @Override
-    public <T> T persist(T entity) {
+    public <T> void persist(T entity) {
         if (entity == null) {
             throw new IllegalArgumentException("Entity must not be null");
         }
@@ -35,8 +35,6 @@ public class DefaultEntityManager implements EntityManager {
 
         Object id = entityPersister.insert(entity);
         persistenceContext.add(id, entity);
-
-        return entity;
     }
 
     private <T> boolean isNew(Object entity) {
@@ -66,7 +64,8 @@ public class DefaultEntityManager implements EntityManager {
         MetadataLoader<?> loader = new SimpleMetadataLoader<>(entity.getClass());
 
         if (isNew(entity)) {
-            return persist(entity);
+            persist(entity);
+            return entity;
         }
 
         Object id = Clause.extractValue(loader.getPrimaryKeyField(), entity);
