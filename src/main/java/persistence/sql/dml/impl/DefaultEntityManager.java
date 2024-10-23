@@ -37,7 +37,7 @@ public class DefaultEntityManager implements EntityManager {
         persistenceContext.add(id, entity);
     }
 
-    private <T> boolean isNew(Object entity) {
+    private boolean isNew(Object entity) {
         try {
             EntityLoader<?> entityLoader = entityLoaderFactory.getLoader(entity.getClass());
             MetadataLoader<?> loader = entityLoader.getMetadataLoader();

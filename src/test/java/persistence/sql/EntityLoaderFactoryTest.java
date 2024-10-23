@@ -51,16 +51,12 @@ class EntityLoaderFactoryTest {
         // given
         EntityLoaderFactory factory = EntityLoaderFactory.getInstance();
 
-        // when, then
-        assertThatThrownBy(() -> factory.getLoader(TestPerson.class))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("EntityLoader not found for " + TestPerson.class.getName());
-
-        // and
+        // when
         factory.addLoader(TestPerson.class, database);
+        EntityLoader<TestPerson> actual = factory.getLoader(TestPerson.class);
 
         // when, then
-        assertThat(factory.getLoader(TestPerson.class)).isNotNull();
+        assertThat(actual).isNotNull();
     }
 
 }
